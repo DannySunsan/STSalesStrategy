@@ -8,7 +8,7 @@
 #include "STMainDlg.h"
 #include "afxdialogex.h"
 #include "resource.h"
-#include "STMain/STTableDefine.h"
+#include "STData/STTableDefine.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -175,7 +175,7 @@ void CSTMainDlg::InitList()
     m_lstMain.InsertColumn(6, L"折后价格");
     m_lstMain.InsertColumn(7, L"购买数量");
 
-    m_lstMain.SetColumnWidth(0, 80);
+    m_lstMain.SetColumnWidth(0, 30);
     m_lstMain.SetColumnWidth(1, 100);
     m_lstMain.SetColumnWidth(2, 100);
     m_lstMain.SetColumnWidth(3, 80);
@@ -213,5 +213,18 @@ void CSTMainDlg::OnCbnSelchangeComboProduct()
 
 void CSTMainDlg::RefreshList(std::wstring strProduct)
 {
+    st::LISTPRODUCT lists;
+    st::STPRODUCTTABLE product;
+    product.strName = L"asd";
+    product.strDescribe = L"erwer";
+    product.dPrice = 0.0;
+    product.lowest_off_Percent = 1.0;
+    product.off_Percent = 2.0;
+    product.off_Price = 3.0;
+    product.uiQuantity = 100;
+    product.strDomain = L"Green";
+    product.strVersion = L"1.0.0";
 
+    m_lstMain.InsertItem(0,L"");
+    m_lstMain.SetItemText(0,1,L"546");
 }
