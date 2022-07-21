@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+#include <list>
 namespace st
 {
     struct STPRODUCTTABLE
@@ -15,4 +15,5 @@ namespace st
         std::wstring strDomain;
         std::wstring strVersion;
     };
+    typedef std::list<STPRODUCTTABLE> LISTPRODUCT;
 }
