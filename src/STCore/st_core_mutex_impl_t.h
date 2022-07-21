@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////////////////////////
-///
-///  Copyright, (c) Shanghai United Imaging Health_care Inc., 2011
 #ifndef UMR_MUTEX_IMPL_H_
 #define UMR_MUTEX_IMPL_H_
 

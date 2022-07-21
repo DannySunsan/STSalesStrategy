@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////////////////////////
-///
-///  Copyright, (c) Shanghai United Imaging Health_care Inc., 2011
 #ifndef ST_CORE_ACTOR_IMPL_T_H_
 #define ST_CORE_ACTOR_IMPL_T_H_
 
