@@ -1,5 +1,4 @@
-#include <string.h>
-
+#include <string>
 #include "st_core_actor_impl.h"
 #include "STCore/st_core_actor.h"
 #include "STCore/st_core_utils.h"

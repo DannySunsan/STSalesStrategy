@@ -13,87 +13,99 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\thread">
+      <UniqueIdentifier>{920b6934-0394-4cb7-8d9a-d016b7fd8030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\excel">
+      <UniqueIdentifier>{99df6fd4-c1ad-4051-981b-eeb61aafc0e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\thread">
+      <UniqueIdentifier>{30218611-d4dd-4bae-8334-64f4cb75d727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\excel">
+      <UniqueIdentifier>{6e011dfb-44b9-49cb-a6bf-535ce135859f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="st_core_actor_impl.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\STCore\st_core_actor.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\STCore\st_core_mutex.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\STCore\st_core_os_type.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\STCore\st_core_return_code.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\STCore\st_core_semaphore.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\STCore\st_core_utils.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\STCore\st_core_actor_t.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\STCore\st_core_condition_sync.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\STCore\st_core_mutex_t.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\STCore\st_core_semaphore_t.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="st_core_actor_impl_t.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="st_core_mutex_impl_t.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="..\include\STCore\st_core_semaphore.h">
+      <Filter>头文件\thread</Filter>
     </ClInclude>
     <ClInclude Include="st_core_semaphore_impl_t.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\STCore\st_core_semaphore_t.h">
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\STCore\st_core_mutex_t.h">
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="st_core_mutex_impl_t.h">
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\STCore\st_core_mutex.h">
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\STCore\st_core_condition_sync.h">
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\STCore\st_core_actor_t.h">
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="st_core_actor_impl_t.h">
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="st_core_actor_impl.h">
+      <Filter>头文件\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\STCore\st_core_actor.h">
+      <Filter>头文件\thread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="st_actor_impl.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="st_core_actor.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="st_core_mutex.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="st_core_semaphore.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="st_core_utils.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="st_actor_impl.cpp">
+      <Filter>源文件\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="st_core_actor.cpp">
+      <Filter>源文件\thread</Filter>
+    </ClCompile>
     <ClCompile Include="st_core_actor_impl_t.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\thread</Filter>
     </ClCompile>
     <ClCompile Include="st_core_actor_t.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\thread</Filter>
     </ClCompile>
     <ClCompile Include="st_core_condition_sync.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="st_core_mutex.cpp">
+      <Filter>源文件\thread</Filter>
     </ClCompile>
     <ClCompile Include="st_core_mutex_impl_t.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\thread</Filter>
     </ClCompile>
     <ClCompile Include="st_core_mutex_t.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="st_core_semaphore.cpp">
+      <Filter>源文件\thread</Filter>
     </ClCompile>
     <ClCompile Include="st_core_semaphore_impl_t.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\thread</Filter>
     </ClCompile>
     <ClCompile Include="st_core_semaphore_t.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\thread</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
