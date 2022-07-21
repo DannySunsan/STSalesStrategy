@@ -1,17 +1,3 @@
-//////////////////////////////////////////////////////////////////////////
-/// \defgroup MRDeviceSubSystem
-///  Copyright, (c) Shanghai United Imaging healthcare Inc., 2011
-///  All rights reserved.
-///
-///  \author   HUANG jintao jintao.huang@united-imaging.com
-///
-///  \file    STCORE_semaphore.h
-///  \brief   define CSemaphore
-///
-///  \version 1.0
-///  \date    August. 20 2014
-//////////////////////////////////////////////////////////////////////////
-
 #ifndef __ST_CORE_SEMAPHORE_H__
 #define __ST_CORE_SEMAPHORE_H__
 
