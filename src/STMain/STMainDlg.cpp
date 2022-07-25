@@ -8,7 +8,7 @@
 #include "STMainDlg.h"
 #include "afxdialogex.h"
 #include "resource.h"
-#include "STData/STTableDefine.h"
+#include "STData/st_data_table_define.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

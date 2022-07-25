@@ -16,4 +16,6 @@ namespace st
         std::wstring strVersion;
     };
     typedef std::list<STPRODUCTTABLE> LISTPRODUCT;
+
+    const std::string ST_DBFILE = "../data/STData/DB/stSale.db";
 }
