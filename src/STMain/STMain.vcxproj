@@ -194,6 +194,8 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="STMain.h" />
     <ClInclude Include="STMainDlg.h" />
+    <ClInclude Include="STNewCompanyDlg.h" />
+    <ClInclude Include="STStrategyDlg.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +207,8 @@
     </ClCompile>
     <ClCompile Include="STMain.cpp" />
     <ClCompile Include="STMainDlg.cpp" />
+    <ClCompile Include="STNewCompanyDlg.cpp" />
+    <ClCompile Include="STStrategyDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="STMain.rc" />

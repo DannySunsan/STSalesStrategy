@@ -29,7 +29,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="st_sql_wrapper.cpp">
+    <ClCompile Include="st_data_sql_wrapper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="st_data_schema_manager.cpp">

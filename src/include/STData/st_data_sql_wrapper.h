@@ -11,12 +11,14 @@ namespace st
     public:
         int OpenDB(std::string sPath);
         int Execute(std::string sSql);
+        std::string GetLastErrMsg();
+        int GetValue(char** argv);
     protected:
         CSqlWrapper();
         ~CSqlWrapper();
     private:
         sqlite3* m_pDb;
         bool m_bIsOK;
-        st_core::CMutex m_Mutex;
+        char m_sErrMsg[255] ;
     };
 }

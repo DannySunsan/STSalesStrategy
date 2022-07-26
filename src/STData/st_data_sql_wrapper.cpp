@@ -1,17 +1,25 @@
 #include "STData/st_data_sql_wrapper.h"
 #include "STData/st_data_table_define.h"
+
 namespace st
 {
-    static int callback(void* NotUsed, int argc, char** argv, char** azColName) {
-        int i;
-        for (i = 0; i < argc; i++) {
-            printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-        }
-        printf("\n");
+    char** g_sql_argv = NULL;
+    int g_sql_argc = 0;
+
+    static int callback(void* NotUsed, int argc, char** argv, char** azColName) 
+    {
+        g_sql_argv = argv;
+        g_sql_argc = argc;
         return 0;
     }
 
-    CSqlWrapper::CSqlWrapper() :m_pDb(nullptr), m_bIsOK(false)
+    int CSqlWrapper::GetValue(char** argv)
+    {
+        argv = g_sql_argv;
+        return g_sql_argc;
+    }
+
+    CSqlWrapper::CSqlWrapper() :m_pDb(nullptr), m_bIsOK(false), m_sErrMsg()
     {
     }
 
@@ -43,12 +51,18 @@ namespace st
         char* zErrMsg = 0;
         int iRt = sqlite3_exec(m_pDb, sSql.c_str(), callback, 0, &zErrMsg);
         if (iRt != SQLITE_OK) {
-            fprintf(stderr, "SQL error: %s\n", zErrMsg);
+            memset(m_sErrMsg,0,255);
+            sprintf_s(m_sErrMsg, "SQL error: %s\n", zErrMsg);
             sqlite3_free(zErrMsg);
         }
         else {
             fprintf(stdout, "Records Excute successfully\n");
         }
         return iRt;
+    }
+
+    std::string CSqlWrapper::GetLastErrMsg()
+    {
+        return m_sErrMsg;
     }
 }

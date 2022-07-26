@@ -72,6 +72,12 @@
     <ClInclude Include="..\include\STCore\st_core_sigleton_template.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\STCore\st_core_convert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="st_core_convert.cpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="st_core_utils.cpp">

@@ -60,11 +60,16 @@ CSTMainDlg::CSTMainDlg(CWnd* pParent /*=nullptr*/)
 
 void CSTMainDlg::DoDataExchange(CDataExchange* pDX)
 {
-    CDialogEx::DoDataExchange(pDX);
-    DDX_Control(pDX, IDC_LIST_MAIN, m_lstMain);
-    DDX_Control(pDX, IDC_BUTTON_RESEARCH, m_btnResearch);
-    DDX_Control(pDX, IDC_BUTTON_EXPORT, m_btnExport);
-    DDX_Control(pDX, IDC_COMBO_PRODUCT, m_cmbProduct);
+	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST_MAIN, m_lstMain);
+	DDX_Control(pDX, IDC_BUTTON_RESEARCH, m_btnResearch);
+	DDX_Control(pDX, IDC_BUTTON_EXPORT, m_btnExport);
+	DDX_Control(pDX, IDC_COMBO_PRODUCT, m_cmbProduct);
+	DDX_Control(pDX, IDC_COMBO_VERSION, m_cbVersion);
+	DDX_Control(pDX, IDC_COMBO_COMPANY, m_cbCompany);
+	DDX_Control(pDX, IDC_COMBO_ST, m_cbStrategy);
+	DDX_Control(pDX, IDC_LIST_STRATAGE, m_listSt);
+	DDX_Control(pDX, IDC_LIST_DESC, m_lsDesc);
 }
 
 BEGIN_MESSAGE_MAP(CSTMainDlg, CDialogEx)
@@ -74,6 +79,8 @@ BEGIN_MESSAGE_MAP(CSTMainDlg, CDialogEx)
     ON_BN_CLICKED(IDC_BUTTON_RESEARCH, &CSTMainDlg::OnBnClickedButtonResearch)
     ON_BN_CLICKED(IDC_BUTTON_EXPORT, &CSTMainDlg::OnBnClickedButtonExport)
     ON_CBN_SELCHANGE(IDC_COMBO_PRODUCT, &CSTMainDlg::OnCbnSelchangeComboProduct)
+	ON_BN_CLICKED(IDC_BUTTON_N_PRODUCT, &CSTMainDlg::OnBnClickedButtonNProduct)
+	ON_BN_CLICKED(IDC_BUTTON_N_STG, &CSTMainDlg::OnBnClickedButtonNStg)
 END_MESSAGE_MAP()
 
 
@@ -227,4 +234,16 @@ void CSTMainDlg::RefreshList(std::wstring strProduct)
 
     m_lstMain.InsertItem(0,L"");
     m_lstMain.SetItemText(0,1,L"546");
+}
+
+
+void CSTMainDlg::OnBnClickedButtonNProduct()
+{
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CSTMainDlg::OnBnClickedButtonNStg()
+{
+	// TODO: 在此添加控件通知处理程序代码
 }

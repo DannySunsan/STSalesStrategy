@@ -35,6 +35,8 @@ protected:
     afx_msg void OnBnClickedButtonResearch();
     afx_msg void OnBnClickedButtonExport();
     afx_msg void OnCbnSelchangeComboProduct();
+	afx_msg void OnBnClickedButtonNProduct();
+	afx_msg void OnBnClickedButtonNStg();
 private:
     void InitList();
     void InitCmbProduct();
@@ -45,4 +47,9 @@ public:
     CButton m_btnResearch;
     CButton m_btnExport;
     CComboBox m_cmbProduct;
+	CComboBox m_cbVersion;
+	CComboBox m_cbCompany;
+	CComboBox m_cbStrategy;
+	CListCtrl m_listSt;
+	CListBox m_lsDesc;
 };

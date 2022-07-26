@@ -22,6 +22,7 @@
     <ClInclude Include="..\include\STCore\st_core_actor.h" />
     <ClInclude Include="..\include\STCore\st_core_actor_t.h" />
     <ClInclude Include="..\include\STCore\st_core_condition_sync.h" />
+    <ClInclude Include="..\include\STCore\st_core_convert.h" />
     <ClInclude Include="..\include\STCore\st_core_mutex.h" />
     <ClInclude Include="..\include\STCore\st_core_mutex_t.h" />
     <ClInclude Include="..\include\STCore\st_core_os_type.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="..\include\STCore\st_core_utils.h" />
     <ClInclude Include="st_core_actor_impl.h" />
     <ClInclude Include="st_core_actor_impl_t.h" />
+    <ClInclude Include="st_core_convert.cpp" />
     <ClInclude Include="st_core_mutex_impl_t.h" />
     <ClInclude Include="st_core_semaphore_impl_t.h" />
   </ItemGroup>
