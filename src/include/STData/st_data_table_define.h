@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include <list>
-namespace st
+#include <vector>
+namespace st_data
 {
     struct STVERSION
     {
@@ -9,7 +9,7 @@ namespace st
         std::wstring strName;
         std::wstring strTime;
     };
-    typedef std::list<STVERSION> LISTVERSION;
+    typedef std::vector<STVERSION> LISTVERSION;
 
     struct STCOMPANY
     {
@@ -17,7 +17,7 @@ namespace st
         std::wstring strName;
         std::wstring strPosition;
     };
-    typedef std::list<STCOMPANY> LISTCOMPANY;
+    typedef std::vector<STCOMPANY> LISTCOMPANY;
 
     struct STPRODUCT
     {
@@ -26,7 +26,7 @@ namespace st
         std::wstring strName;       
         double d_defaule_off_Percent;       
     };
-    typedef std::list<STPRODUCT> LISTPRODUCT;
+    typedef std::vector<STPRODUCT> LISTPRODUCT;
 
     struct STSERVICE
     {
@@ -37,12 +37,9 @@ namespace st
         double dPrice;
         double default_off_Percent;
         std::wstring strLock;
-
-        double dOffPercent;
-        int iNumber;
     };
 
-    typedef std::list<STSERVICE> LISTSERVICE;
+    typedef std::vector<STSERVICE> LISTSERVICE;
 
     struct STSTRATEGY
     {
@@ -56,7 +53,18 @@ namespace st
         double dOffPercent;
         double dFinalPrice;
     };
-    typedef std::list<STSTRATEGY> LISTSTSTRATEGY;
+    typedef std::vector<STSTRATEGY> LISTSTRATEGY;
+
+    struct STSTRATEGYSERVICE
+    {
+        int iId;
+        int iStrateguId;
+        int iServiceId;
+        int iNumber;
+        double dOffPercent;
+    };
+    typedef std::vector<STSTRATEGYSERVICE> LISTSTRATEGYSERVICE;
 
     const std::string ST_DBFILE = "../data/STData/DB/stSale.db";
+
 }

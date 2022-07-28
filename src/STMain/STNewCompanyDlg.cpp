@@ -39,7 +39,7 @@ END_MESSAGE_MAP()
 
 void STNewCompanyDlg::OnBnClickedButtonOk()
 {
-	st::STCOMPANY cp;
+	st_data::STCOMPANY cp;
 	ZeroMemory(&cp,sizeof(cp));
 	CStringW csName,csPostion;
 	m_editName.GetWindowTextW(csName);
@@ -51,9 +51,9 @@ void STNewCompanyDlg::OnBnClickedButtonOk()
 	}
 	cp.strName = csName;
 	cp.strPosition = csPostion;
-	if (0 != st::CSchemaManager::GetInstance()->AddCompany(cp))
+	if (0 != st_data::CSchemaManager::GetInstance()->AddCompany(cp))
 	{
-		CString szMsg(st::CSchemaManager::GetInstance()->GetErrorMsg().c_str());
+		CString szMsg(st_data::CSchemaManager::GetInstance()->GetErrorMsg().c_str());
 		MessageBoxW(szMsg);
 		return;
 	}

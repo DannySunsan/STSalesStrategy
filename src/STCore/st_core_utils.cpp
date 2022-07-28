@@ -39,7 +39,7 @@ CUtils::~CUtils()
 unsigned long CUtils::GetCurrentTimes()
 {
 #ifdef _STCORE_OS_WIN_ // for windows impletement
-    return static_cast<unsigned long>(::GetTickCount());
+    return static_cast<unsigned long>(::GetTickCount64());
 #elif defined(_STCORE_OS_LINUX_)
     struct timeval tv;
 

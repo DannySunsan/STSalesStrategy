@@ -59,15 +59,15 @@ void STStrategyDlg::OnBnClickedButtonAdd()
 void STStrategyDlg::RefreshCompany(std::wstring csName)
 {
 	m_cbCP.Clear();
-	st::LISTCOMPANY lstCo;
-	if (0 != st::CSchemaManager::GetInstance()->GetCompany(csName, lstCo))
+    st_data::LISTCOMPANY lstCo;
+	if (0 != st_data::CSchemaManager::GetInstance()->GetCompany(lstCo))
 	{
-		CString szMsg(st::CSchemaManager::GetInstance()->GetErrorMsg().c_str());
+		CString szMsg(st_data::CSchemaManager::GetInstance()->GetErrorMsg().c_str());
 		MessageBoxW(szMsg);
 		return;
 	}
 	int iIndex = 0;
-	for (st::LISTCOMPANY::iterator it = lstCo.begin();
+	for (st_data::LISTCOMPANY::iterator it = lstCo.begin();
 		it != lstCo.end();++it)
 	{
 		m_cbCP.InsertString(iIndex,it->strName.c_str());

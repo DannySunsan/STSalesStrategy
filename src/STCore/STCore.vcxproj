@@ -23,6 +23,7 @@
     <ClInclude Include="..\include\STCore\st_core_actor_t.h" />
     <ClInclude Include="..\include\STCore\st_core_condition_sync.h" />
     <ClInclude Include="..\include\STCore\st_core_convert.h" />
+    <ClInclude Include="..\include\STCore\st_core_excel_creator.h" />
     <ClInclude Include="..\include\STCore\st_core_mutex.h" />
     <ClInclude Include="..\include\STCore\st_core_mutex_t.h" />
     <ClInclude Include="..\include\STCore\st_core_os_type.h" />
@@ -31,9 +32,9 @@
     <ClInclude Include="..\include\STCore\st_core_semaphore_t.h" />
     <ClInclude Include="..\include\STCore\st_core_sigleton_template.h" />
     <ClInclude Include="..\include\STCore\st_core_utils.h" />
+    <ClInclude Include="..\include\STCore\st_core_excel.h" />
     <ClInclude Include="st_core_actor_impl.h" />
     <ClInclude Include="st_core_actor_impl_t.h" />
-    <ClInclude Include="st_core_convert.cpp" />
     <ClInclude Include="st_core_mutex_impl_t.h" />
     <ClInclude Include="st_core_semaphore_impl_t.h" />
   </ItemGroup>
@@ -43,6 +44,8 @@
     <ClCompile Include="st_core_actor_impl_t.cpp" />
     <ClCompile Include="st_core_actor_t.cpp" />
     <ClCompile Include="st_core_condition_sync.cpp" />
+    <ClCompile Include="st_core_convert.cpp" />
+    <ClCompile Include="st_core_excel_creator.cpp" />
     <ClCompile Include="st_core_mutex.cpp" />
     <ClCompile Include="st_core_mutex_impl_t.cpp" />
     <ClCompile Include="st_core_mutex_t.cpp" />
@@ -50,6 +53,7 @@
     <ClCompile Include="st_core_semaphore_impl_t.cpp" />
     <ClCompile Include="st_core_semaphore_t.cpp" />
     <ClCompile Include="st_core_utils.cpp" />
+    <ClCompile Include="st_core_excel.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

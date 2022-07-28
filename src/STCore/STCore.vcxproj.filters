@@ -75,8 +75,11 @@
     <ClInclude Include="..\include\STCore\st_core_convert.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="st_core_convert.cpp">
-      <Filter>源文件</Filter>
+    <ClInclude Include="..\include\STCore\st_core_excel_creator.h">
+      <Filter>头文件\excel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\STCore\st_core_excel.h">
+      <Filter>头文件\excel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +118,15 @@
     </ClCompile>
     <ClCompile Include="st_core_semaphore_t.cpp">
       <Filter>源文件\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="st_core_convert.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="st_core_excel_creator.cpp">
+      <Filter>源文件\excel</Filter>
+    </ClCompile>
+    <ClCompile Include="st_core_excel.cpp">
+      <Filter>源文件\excel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

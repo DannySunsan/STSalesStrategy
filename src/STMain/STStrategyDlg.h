@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include <string>
 
 // STStrategyDlg 对话框
 
