@@ -2,20 +2,17 @@
 #include "STData/st_data_schema_manager.h"
 #include "STCore/st_core_convert.h"
 
-namespace st
+namespace st_data
 {
     CSchemaManager::CSchemaManager():m_sql(NULL)
     {
-
+        m_sql = new CSqlWrapper();
+        InitSchema();
     }
 
     int CSchemaManager::InitSchema()
     {
-        int iRet = m_sql->OpenDB(ST_DBFILE);
-        if (iRet)
-        {
-            return iRet;
-        }
+        return m_sql->OpenDB(ST_DBFILE);
     }
 
     const std::string& CSchemaManager::GetErrorMsg()
@@ -23,7 +20,7 @@ namespace st
         return m_sql->GetLastErrMsg();
     }
 
-    int CSchemaManager::AddCompany(const st::STCOMPANY& cp)
+    int CSchemaManager::AddCompany(const st_data::STCOMPANY& cp)
     {
         m_Mutex.Lock();
         int iRet = 0;
@@ -38,7 +35,7 @@ namespace st
         return iRet;
     }
 
-    int CSchemaManager::AddStrategy(const st::STSTRATEGY st)
+    int CSchemaManager::AddStrategy(const st_data::STSTRATEGY& st)
     {
         m_Mutex.Lock();
         int iRet = 0;
@@ -54,7 +51,7 @@ namespace st
         return iRet;
     }
 
-    int CSchemaManager::AddProduct(const st::STPRODUCT pd)
+    int CSchemaManager::AddProduct(const st_data::STPRODUCT& pd)
     {
         m_Mutex.Lock();
         int iRet = 0;
@@ -70,7 +67,7 @@ namespace st
         return iRet;
     }
 
-    int CSchemaManager::AddService(const st::STSERVICE sv)
+    int CSchemaManager::AddService(const st_data::STSERVICE& sv)
     {
         m_Mutex.Lock();
         int iRet = 0;
@@ -86,7 +83,7 @@ namespace st
         return iRet;
     }
 
-    int CSchemaManager::AddVersion(const st::STVERSION ver)
+    int CSchemaManager::AddVersion(const st_data::STVERSION& ver)
     {
         m_Mutex.Lock();
         int iRet = 0;
@@ -102,30 +99,42 @@ namespace st
         return iRet;
     }
 
-    int CSchemaManager::GetCompany(std::wstring csName, LISTCOMPANY& lstCo)
+    int CSchemaManager::AddStrategyService(const st_data::LISTSTRATEGYSERVICE& m_lstStService)
     {
         m_Mutex.Lock();
         int iRet = 0;
         wchar_t wSql[255];
-        swprintf_s(wSql, L"SELECT * FROM stSale.sale_company \
-           where name like '%%%s%%' OR position like '%%%s%%'", csName.c_str(), csName.c_str());
+
+        /*swprintf_s(wSql, L"INSERT INTO stSale.sale_version \
+            [(name)] \
+            VALUES(%s)", ver.strName.c_str());*/
         char sSql[255];
         st_core::CConvert::WCharToUTF8(wSql, 255, sSql, 255);
+        iRet = m_sql->Execute(sSql);
+        m_Mutex.UnLock();
+        return iRet;
+    }
+
+    int CSchemaManager::GetCompany(LISTCOMPANY& lstCo)
+    {
+        m_Mutex.Lock();
+        int iRet = 0;
+        char sSql[255];
+        sprintf_s(sSql, "SELECT * FROM stSale.sale_company");
         iRet = m_sql->Execute(sSql);
 
         m_Mutex.UnLock();
         return iRet;
     }
 
-    int CSchemaManager::GetStrategy(int iCoID, LISTSTSTRATEGY& lstSt)
+    int CSchemaManager::GetStrategy(int iCoID, LISTSTRATEGY& lstSt)
     {
         m_Mutex.Lock();
         int iRet = 0;
-        wchar_t wSql[255];
-        swprintf_s(wSql, L"SELECT * FROM stSale.sale_strategy \
-           where company_id = '%d'", iCoID);
+
         char sSql[255];
-        st_core::CConvert::WCharToUTF8(wSql, 255, sSql, 255);
+        sprintf_s(sSql, "SELECT * FROM stSale.sale_strategy \
+           where company_id = '%d'", iCoID);
         iRet = m_sql->Execute(sSql);
 
         m_Mutex.UnLock();
@@ -136,11 +145,10 @@ namespace st
     {
         m_Mutex.Lock();
         int iRet = 0;
-        wchar_t wSql[255];
-        swprintf_s(wSql, L"SELECT * FROM stSale.sale_product \
-           where version_id = '%d'", iVerID);
+
         char sSql[255];
-        st_core::CConvert::WCharToUTF8(wSql, 255, sSql, 255);
+        sprintf_s(sSql, "SELECT * FROM stSale.sale_product \
+           where version_id = '%d'", iVerID);
         iRet = m_sql->Execute(sSql);
 
         m_Mutex.UnLock();
@@ -151,17 +159,15 @@ namespace st
     {
         m_Mutex.Lock();
         int iRet = 0;
-        wchar_t wSql[255];
-        swprintf_s(wSql, L"SELECT * FROM stSale.sale_product_service \
-           where product_id = '%d'", iProductID);
+
         char sSql[255];
-        st_core::CConvert::WCharToUTF8(wSql, 255, sSql, 255);
+        sprintf_s(sSql, "SELECT * FROM stSale.sale_product_service \
+           where product_id = '%d'", iProductID);
         iRet = m_sql->Execute(sSql);
         if (0 == iRet)
         {
 
         }
-
 
         m_Mutex.UnLock();
         return iRet;
@@ -176,5 +182,31 @@ namespace st
 
         m_Mutex.UnLock();
         return iRet;
+    }
+
+    int CSchemaManager::GetStrategyService(int iStrategy, st_data::LISTSTRATEGYSERVICE& m_lstStService)
+    {
+        m_Mutex.Lock();
+        int iRet = 0;
+        char sSql[255] = "SELECT * FROM stSale.sale_strategy_service";
+        iRet = m_sql->Execute(sSql);
+
+        m_Mutex.UnLock();
+        return iRet;
+    }
+
+    int CSchemaManager::Begin()
+    {
+        return m_sql->Begin();
+    }
+
+    int CSchemaManager::Commit()
+    {
+        return m_sql->Commit();
+    }
+
+    int CSchemaManager::RollBack()
+    {
+        return m_sql->RollBack();
     }
 }

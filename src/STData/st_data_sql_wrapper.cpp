@@ -1,7 +1,7 @@
 #include "STData/st_data_sql_wrapper.h"
 #include "STData/st_data_table_define.h"
 
-namespace st
+namespace st_data
 {
     char** g_sql_argv = NULL;
     int g_sql_argc = 0;
@@ -19,7 +19,9 @@ namespace st
         return g_sql_argc;
     }
 
-    CSqlWrapper::CSqlWrapper() :m_pDb(nullptr), m_bIsOK(false), m_sErrMsg()
+    CSqlWrapper::CSqlWrapper() :
+        m_pDb(NULL), m_bIsOK(false),
+        m_sErrMsg(), m_pStmt(NULL)
     {
     }
 
@@ -33,7 +35,7 @@ namespace st
 
     int CSqlWrapper::OpenDB(std::string sPath)
     {
-        int iRt = sqlite3_open(sPath.c_str(), &m_pDb);
+        int iRt = sqlite3_open16(sPath.c_str(), &m_pDb);
         if (SQLITE_OK != iRt) {
             fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(m_pDb));
             return iRt;
@@ -64,5 +66,20 @@ namespace st
     std::string CSqlWrapper::GetLastErrMsg()
     {
         return m_sErrMsg;
+    }
+
+    int CSqlWrapper::Begin()
+    {
+        return Execute("begin transaction");
+    }
+
+    int CSqlWrapper::Commit()
+    {
+        return Execute("commit transaction");
+    }
+
+    int CSqlWrapper::RollBack()
+    {
+        return Execute("rollback transaction");
     }
 }

@@ -39,6 +39,15 @@
     <ClInclude Include="STNewCompanyDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="STNewVersionDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="STNewProductDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="STImportDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="STMain.cpp">
@@ -54,6 +63,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="STNewCompanyDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="STNewVersionDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="STNewProductDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="STImportDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

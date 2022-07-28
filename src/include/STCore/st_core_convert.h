@@ -2,7 +2,6 @@
 #ifndef __ST_CORE_CONVERT_H__
 #define __ST_CORE_CONVERT_H__
 
-#include <stdint.h>
 #include "STCore/st_core_os_type.h"
 
 
