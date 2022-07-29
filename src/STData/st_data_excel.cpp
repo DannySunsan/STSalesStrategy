@@ -1,6 +1,6 @@
-#include "STCore/st_core_excel.h"
+#include "STData/st_data_excel.h"
 
-namespace st_core
+namespace st_data
 {
     CSTExcel::CSTExcel():m_pSelSheet(NULL), m_pBook(NULL)
     {
@@ -20,6 +20,13 @@ namespace st_core
         AddFont("default", fontDefault);
         STCELLFORMAT formatDefault;
         AddFormat("default", formatDefault);
+
+       SelectSheet(0);
+    }
+
+    libxl::Format* CSTExcel::GetFormat(const std::string& sFormatName)
+    {
+        return m_mapFormat[sFormatName];
     }
 
     void CSTExcel::AddSheet(const std::string& sName)
@@ -85,26 +92,32 @@ namespace st_core
         return m_pSelSheet->setMerge(rowFirst, rowLast, colFirst, colLast);
     }
 
-    void CSTExcel::SetCellFormat(int row, int col, const std::string& sFormatName)
+    void CSTExcel::SelectFormat(const std::string& sFormatName)
     {
-        libxl::Format* pFormat = m_mapFormat[sFormatName];
+        m_pSelFormat = GetFormat(sFormatName);
 
-        if (NULL == pFormat)
+        if (NULL == m_pSelFormat)
         {
-            pFormat = m_mapFormat["default"];
+            m_pSelFormat = m_mapFormat["default"];
         }
-
-        m_pSelSheet->setCellFormat(row, col, pFormat);
     }
 
     bool CSTExcel::WriteNum(int row,int col,double num)
     {
+        m_pSelSheet->setCellFormat(row, col, m_pSelFormat);
         return m_pSelSheet->writeNum(row, col, num);
     }
 
     bool CSTExcel::WriteString(int row, int col, const std::string& sValue)
     {
+        m_pSelSheet->setCellFormat(row, col, m_pSelFormat);
         return m_pSelSheet->writeStr(row, col, sValue.c_str());
+    }
+
+    bool CSTExcel::WriteFormula(int row, int col, const std::string& sValue)
+    {
+        m_pSelSheet->setCellFormat(row, col, m_pSelFormat);
+        return m_pSelSheet->writeFormula(row, col, sValue.c_str());
     }
 
     bool CSTExcel::InsertPic(const std::string& sPath)
@@ -147,5 +160,18 @@ namespace st_core
             return true;
         }
         return false;
+    }
+
+    void CSTExcel::GetCellRange(int& firstRow, int& lastRow, int& firstCol, int& lastCol)
+    {
+        firstRow = m_pSelSheet->firstRow();
+        lastRow = m_pSelSheet->lastRow();
+        firstCol = m_pSelSheet->firstCol();
+        lastCol = m_pSelSheet->lastCol();
+    }
+
+    bool CSTExcel::GetCellMerge(int row, int col, int& firstRow, int& lastRow, int& firstCol, int& lastCol)
+    {
+        return m_pSelSheet->getMerge(row, col, &firstRow, &lastRow, &firstCol, &lastCol);
     }
 }

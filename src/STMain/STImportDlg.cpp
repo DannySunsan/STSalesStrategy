@@ -7,13 +7,16 @@
 #include "afxdialogex.h"
 #include "STNewProductDlg.h"
 #include "STNewVersionDlg.h"
+#include "STData/st_data_excel_operator.h"
 #include "STData/st_data_schema_manager.h"
+#include "STCore/st_core_convert.h"
 // STImportDlg 对话框
 
 IMPLEMENT_DYNAMIC(STImportDlg, CDialogEx)
 
 STImportDlg::STImportDlg(CWnd* pParent /*=nullptr*/)
-    : CDialogEx(IDD_DIALOG_IMPORT, pParent)
+    : CDialogEx(IDD_DIALOG_IMPORT, pParent), 
+    m_iCurVersion(0), m_iCurProduct(0)
 {
 
 }
@@ -142,7 +145,17 @@ void STImportDlg::OnCbnSelchangeComboProduct()
 
 void STImportDlg::OnBnClickedButtonSelectexcel()
 {
-   
+    LPCTSTR lpszFilter = L"Chart Files(*.xlc) | *.xlc | Worksheet Files(*.xls) | *.xls | Data Files(*.xlc; *.xls) | *.xlc; *.xls | All Files(*.*) | *.* || ";
+    CFileDialog FileOpen(TRUE, NULL, NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, lpszFilter);
+    if (IDOK == FileOpen.DoModal())
+    {
+        CString PathName = FileOpen.GetPathName();
+        CString FileName = FileOpen.GetFileName() + PathName;
+        std::string sPath = st_core::CConvert::WStringToString(FileName.GetString());
+        st_data::CSTExcelOperator::ReadProductList(sPath);
+    }
+
+    
 }
 
 

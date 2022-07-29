@@ -28,6 +28,7 @@ public:
     afx_msg void OnCbnSelchangeComboVersion();
     afx_msg void OnCbnSelchangeComboProduct();
     afx_msg void OnBnClickedButtonSelectexcel();
+    afx_msg void OnClose();
 
     void RefreshVersion();
     void RefreshProduct();
@@ -47,5 +48,4 @@ public:
     CComboBox m_cbLock;
     CEdit m_editOff;
     CListCtrl m_lstImport;
-    afx_msg void OnClose();
 };
