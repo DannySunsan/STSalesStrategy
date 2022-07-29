@@ -152,7 +152,7 @@ void STImportDlg::OnBnClickedButtonSelectexcel()
         CString PathName = FileOpen.GetPathName();
         CString FileName = FileOpen.GetFileName() + PathName;
         std::string sPath = st_core::CConvert::WStringToString(FileName.GetString());
-        st_data::CSTExcelOperator::ReadProductList(sPath);
+        //st_data::CSTExcelOperator::ReadProductList(sPath);
     }
 
     
