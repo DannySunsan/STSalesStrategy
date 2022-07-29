@@ -35,7 +35,7 @@ namespace st_data
 
     int CSqlWrapper::OpenDB(std::string sPath)
     {
-        int iRt = sqlite3_open16(sPath.c_str(), &m_pDb);
+        int iRt = sqlite3_open(sPath.c_str(), &m_pDb);
         if (SQLITE_OK != iRt) {
             fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(m_pDb));
             return iRt;

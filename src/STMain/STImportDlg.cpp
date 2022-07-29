@@ -145,14 +145,15 @@ void STImportDlg::OnCbnSelchangeComboProduct()
 
 void STImportDlg::OnBnClickedButtonSelectexcel()
 {
-    LPCTSTR lpszFilter = L"Chart Files(*.xlc) | *.xlc | Worksheet Files(*.xls) | *.xls | Data Files(*.xlc; *.xls) | *.xlc; *.xls | All Files(*.*) | *.* || ";
+    LPCTSTR lpszFilter = L"Worksheet Files(*.xlsx; *.xls) | *.xlsx; *.xls | All Files(*.*) | *.* ||";
     CFileDialog FileOpen(TRUE, NULL, NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, lpszFilter);
     if (IDOK == FileOpen.DoModal())
     {
         CString PathName = FileOpen.GetPathName();
         CString FileName = FileOpen.GetFileName() + PathName;
         std::string sPath = st_core::CConvert::WStringToString(FileName.GetString());
-        //st_data::CSTExcelOperator::ReadProductList(sPath);
+        st_data::LISTPRODUCT pd;
+        st_data::CSTExcelOperator::ReadProductList(sPath,pd);
     }
 
     

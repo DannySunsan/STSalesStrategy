@@ -65,6 +65,6 @@ namespace st_data
     };
     typedef std::vector<STSTRATEGYSERVICE> LISTSTRATEGYSERVICE;
 
-    const std::string ST_DBFILE = "../data/STData/DB/stSale.db";
+    const std::string ST_DBFILE = "../../data/STData/DB/stSale.db";
 
 }

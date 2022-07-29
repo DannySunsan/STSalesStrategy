@@ -9,6 +9,7 @@
 #include "afxdialogex.h"
 #include "resource.h"
 #include "STImportDlg.h"
+#include "STStrategyDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -353,7 +354,8 @@ void CSTMainDlg::OnBnClickedButtonNProduct()
 
 void CSTMainDlg::OnBnClickedButtonNStg()
 {
-	// TODO: 在此添加控件通知处理程序代码
+    STStrategyDlg dlg;
+    dlg.DoModal();
 }
 
 void CSTMainDlg::OnCbnSelchangeComboProduct()
