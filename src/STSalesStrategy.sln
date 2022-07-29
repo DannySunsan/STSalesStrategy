@@ -12,6 +12,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STCore", "STCore\STCore.vcxproj", "{7CB1AA5E-C22C-4879-939B-053B160709F2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STData", "STData\STData.vcxproj", "{33D0809B-9A3A-4520-9726-D364D0FC5886}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7CB1AA5E-C22C-4879-939B-053B160709F2} = {7CB1AA5E-C22C-4879-939B-053B160709F2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

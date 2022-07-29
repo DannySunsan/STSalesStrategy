@@ -1,9 +1,9 @@
 #pragma once
-#include "STData/st_data_os_type.h"
+#include "st_data_os_type.h"
 #include "libxl/libxl.h"
 #include <string>
 #include <unordered_map>
-namespace st_core
+namespace st_data
 {
     struct STFONTFORMAT
     {
@@ -83,16 +83,29 @@ namespace st_core
 
         bool Merge(int rowFirst, int rowLast, int colFirst, int colLast);
 
-        void SetCellFormat(int row, int col,const std::string& sFormatName);
-
         bool WriteNum(int row, int col, double num);
         bool WriteString(int row, int col, const std::string& sValue);
+        bool WriteFormula(int row, int col, const std::string& sExpr);
         bool InsertPic(const std::string& sPath);
 
+        double ReadNum(int row, int col, libxl::Format** format= 0);
+        std::string ReadString(int row, int col, libxl::Format** format = 0);
+
+        bool Load(const std::string& sPath);
         bool Save(const std::string& sPath);
+        bool SelectSheet(int iNum);
+        void SelectFormat(const std::string& sFormatName = "default");
+
+        void GetCellRange(int& firstRow,int& lastRow,int& firstCol,int& lastCol);
+        bool GetCellMerge(int row,int col,int& firstRow, int& lastRow, int& firstCol, int& lastCol);
+    private:
+        void InitBook();
+        libxl::Format* GetFormat(const std::string& sFormatName);
     private:
         libxl::Book* m_pBook;
         libxl::Sheet* m_pSelSheet;
+        libxl::Format* m_pSelFormat;
+
         std::unordered_map<std::string, libxl::Font*> m_mapFont;
         std::unordered_map<std::string, libxl::Format*> m_mapFormat;
     };

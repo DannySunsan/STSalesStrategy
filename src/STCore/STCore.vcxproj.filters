@@ -16,14 +16,8 @@
     <Filter Include="头文件\thread">
       <UniqueIdentifier>{920b6934-0394-4cb7-8d9a-d016b7fd8030}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\excel">
-      <UniqueIdentifier>{99df6fd4-c1ad-4051-981b-eeb61aafc0e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\thread">
       <UniqueIdentifier>{30218611-d4dd-4bae-8334-64f4cb75d727}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\excel">
-      <UniqueIdentifier>{6e011dfb-44b9-49cb-a6bf-535ce135859f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,12 +69,6 @@
     <ClInclude Include="..\include\STCore\st_core_convert.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\STCore\st_core_excel_creator.h">
-      <Filter>头文件\excel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\STCore\st_core_excel.h">
-      <Filter>头文件\excel</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="st_core_utils.cpp">
@@ -121,12 +109,6 @@
     </ClCompile>
     <ClCompile Include="st_core_convert.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="st_core_excel_creator.cpp">
-      <Filter>源文件\excel</Filter>
-    </ClCompile>
-    <ClCompile Include="st_core_excel.cpp">
-      <Filter>源文件\excel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
