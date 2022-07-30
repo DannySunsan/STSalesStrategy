@@ -2,9 +2,9 @@
 
 namespace st_data
 {
-    CSTExcel::CSTExcel():m_pSelSheet(NULL), m_pBook(NULL)
+    CSTExcel::CSTExcel(EFILETYPE eType):m_pSelSheet(NULL), m_pBook(NULL)
     {
-        InitBook();
+        InitBook(eType);
     }
 
     CSTExcel::~CSTExcel()
@@ -12,9 +12,16 @@ namespace st_data
         m_pBook->release();
     }
 
-    void CSTExcel::InitBook()
+    void CSTExcel::InitBook(EFILETYPE eType)
     {
-        m_pBook = xlCreateBook();
+        if (eType == XLS)
+        {
+            m_pBook = xlCreateBook();
+        }
+        else
+        {
+            m_pBook = xlCreateXMLBook();
+        }
         m_pBook->setKey("Halil Kural", "windows-2723210a07c4e90162b26966a8jcdboe");
         STFONTFORMAT fontDefault;
         AddFont("default", fontDefault);
@@ -125,6 +132,11 @@ namespace st_data
         return true;
     }
 
+    bool CSTExcel::ReadBool(int row, int col, libxl::Format** format)
+    {
+        return m_pSelSheet->readBool(row, col, format);
+    }
+
     double CSTExcel::ReadNum(int row, int col, libxl::Format** format)
     {
         return m_pSelSheet->readNum(row, col, format);
@@ -173,5 +185,37 @@ namespace st_data
     bool CSTExcel::GetCellMerge(int row, int col, int& firstRow, int& lastRow, int& firstCol, int& lastCol)
     {
         return m_pSelSheet->getMerge(row, col, &firstRow, &lastRow, &firstCol, &lastCol);
+    }
+
+    std::string CSTExcel::GetErrorMsg()
+    {
+        return m_pBook->errorMessage();
+    }
+
+    CSTMetaData CSTExcel::GetCellData(int row, int col, libxl::Format** format = 0)
+    {
+        CSTMetaData data;
+        switch (m_pSelSheet->cellType(row, col))
+        {
+        case libxl::CELLTYPE_EMPTY:
+            break;
+        case libxl::CELLTYPE_NUMBER:
+            data.SetDouble(ReadNum(row, col, format));
+            break;
+        case libxl::CELLTYPE_STRING:
+            data.SetString(ReadString(row, col, format));
+            break;
+        case libxl::CELLTYPE_BOOLEAN:
+            data.SetBool(ReadBool(row, col, format));
+            break;
+        case libxl::CELLTYPE_BLANK:
+            break;
+        case libxl::CELLTYPE_STRICTDATE:
+            break;
+        case libxl::CELLTYPE_ERROR:
+            break;
+        }
+
+        return data;
     }
 }

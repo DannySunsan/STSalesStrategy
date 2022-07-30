@@ -150,8 +150,8 @@ void STImportDlg::OnBnClickedButtonSelectexcel()
     if (IDOK == FileOpen.DoModal())
     {
         CString PathName = FileOpen.GetPathName();
-        CString FileName = FileOpen.GetFileName() + PathName;
-        std::string sPath = st_core::CConvert::WStringToString(FileName.GetString());
+
+        std::string sPath = st_core::CConvert::WStringToString(PathName.GetString());
         st_data::LISTPRODUCT pd;
         st_data::CSTExcelOperator::ReadProductList(sPath,pd);
     }

@@ -136,6 +136,7 @@
     <ClInclude Include="..\include\STData\st_data_table_define.h" />
     <ClInclude Include="..\include\STData\st_data_os_type.h" />
     <ClInclude Include="..\include\STData\st_data_sql_wrapper.h" />
+    <ClInclude Include="..\include\STData\st_data_meta_data.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="st_data_excel.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="st_data_schema_manager.cpp" />
     <ClCompile Include="st_data_sql_wrapper.cpp" />
     <ClCompile Include="st_data_statement.cpp" />
+    <ClCompile Include="st_data_meta_data.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

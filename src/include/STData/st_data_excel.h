@@ -1,10 +1,16 @@
 #pragma once
-#include "st_data_os_type.h"
 #include "libxl/libxl.h"
 #include <string>
 #include <unordered_map>
+#include "st_data_os_type.h"
+#include "st_data_meta_data.h"
 namespace st_data
 {
+    enum EFILETYPE
+    {
+        XLS,
+        XLSX
+    };
     struct STFONTFORMAT
     {
         int size;
@@ -75,7 +81,7 @@ namespace st_data
     class STDATA_EXPORT CSTExcel
     {
     public:
-        CSTExcel();
+        CSTExcel(EFILETYPE eType = XLS);
         ~CSTExcel();
         void AddSheet(const std::string& sName);
         void AddFont(const std::string& sName, const STFONTFORMAT& stFont);
@@ -83,11 +89,13 @@ namespace st_data
 
         bool Merge(int rowFirst, int rowLast, int colFirst, int colLast);
 
+        bool WriteBool(int row, int col, bool bValue);
         bool WriteNum(int row, int col, double num);
         bool WriteString(int row, int col, const std::string& sValue);
         bool WriteFormula(int row, int col, const std::string& sExpr);
         bool InsertPic(const std::string& sPath);
 
+        bool ReadBool(int row, int col, libxl::Format** format = 0);
         double ReadNum(int row, int col, libxl::Format** format= 0);
         std::string ReadString(int row, int col, libxl::Format** format = 0);
 
@@ -97,9 +105,14 @@ namespace st_data
         void SelectFormat(const std::string& sFormatName = "default");
 
         void GetCellRange(int& firstRow,int& lastRow,int& firstCol,int& lastCol);
+
         bool GetCellMerge(int row,int col,int& firstRow, int& lastRow, int& firstCol, int& lastCol);
+
+        std::string GetErrorMsg();
+
+        CSTMetaData GetCellData(int row, int col, libxl::Format** format = 0);
     private:
-        void InitBook();
+        void InitBook(EFILETYPE eType = XLS);
         libxl::Format* GetFormat(const std::string& sFormatName);
     private:
         libxl::Book* m_pBook;

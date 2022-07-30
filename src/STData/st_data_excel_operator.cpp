@@ -20,9 +20,10 @@ namespace st_data
 
     bool CSTExcelOperator::ReadProductList(const std::string& sPath, st_data::LISTPRODUCT& pd)
     {
-        CSTExcel excel;
+        CSTExcel excel(XLSX);
         if (!excel.Load(sPath))
         {
+            std::string Error = excel.GetErrorMsg();
             return false;
         }
         int firstRow;
@@ -37,6 +38,8 @@ namespace st_data
             {
                 STPRODUCT product;
                 std::string sService = excel.ReadString(r,c);
+
+                std::string Error = excel.GetErrorMsg();
             }
         }
 
