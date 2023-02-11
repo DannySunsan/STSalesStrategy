@@ -28,8 +28,7 @@ namespace st_data
         swprintf_s(wSql, L"INSERT INTO stSale.sale_company \
             [(name, position)] \
             VALUES(%s,%s)",cp.strName.c_str(),cp.strPosition.c_str());
-        char sSql[255];
-        st_core::CConvert::WCharToUTF8(wSql,255, sSql,255);
+        std::string sSql = st_core::CConvert::WStringToUTF8(wSql);
         m_sql->Execute(sSql);
         m_Mutex.UnLock();
         return iRet;
@@ -60,8 +59,7 @@ namespace st_data
         swprintf_s(wSql, L"INSERT INTO stSale.sale_product \
             [(name, version_id)] \
             VALUES(%s,%d)", pd.strName.c_str(), pd.iVerId);
-        char sSql[255];
-        st_core::CConvert::WCharToUTF8(wSql, 255, sSql, 255);
+        std::string sSql = st_core::CConvert::WStringToUTF8(wSql);
         iRet = m_sql->Execute(sSql);
         m_Mutex.UnLock();
         return iRet;
@@ -76,8 +74,7 @@ namespace st_data
         swprintf_s(wSql, L"INSERT INTO stSale.sale_product_service \
             [(product_id,name, describe,price,default_off_percent,lock)] \
             VALUES(%d,%s,%s,%lf,%lf,%s)", sv.iProductId, sv.strName.c_str(), sv.strDescribe.c_str(), sv.dPrice, sv.default_off_Percent, sv.strLock.c_str());
-        char sSql[255];
-        st_core::CConvert::WCharToUTF8(wSql, 255, sSql, 255);
+        std::string sSql = st_core::CConvert::WStringToUTF8(wSql);
         iRet = m_sql->Execute(sSql);
         m_Mutex.UnLock();
         return iRet;
@@ -92,8 +89,7 @@ namespace st_data
         swprintf_s(wSql, L"INSERT INTO stSale.sale_version \
             [(name)] \
             VALUES(%s)", ver.strName.c_str());
-        char sSql[255];
-        st_core::CConvert::WCharToUTF8(wSql, 255, sSql, 255);
+        std::string sSql = st_core::CConvert::WStringToUTF8(wSql);
         iRet = m_sql->Execute(sSql);
         m_Mutex.UnLock();
         return iRet;
@@ -108,8 +104,7 @@ namespace st_data
         /*swprintf_s(wSql, L"INSERT INTO stSale.sale_version \
             [(name)] \
             VALUES(%s)", ver.strName.c_str());*/
-        char sSql[255];
-        st_core::CConvert::WCharToUTF8(wSql, 255, sSql, 255);
+        std::string sSql = st_core::CConvert::WStringToUTF8(wSql);
         iRet = m_sql->Execute(sSql);
         m_Mutex.UnLock();
         return iRet;

@@ -36,6 +36,9 @@
     <ClInclude Include="..\include\STData\st_data_excel_operator.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\STData\st_data_meta_data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="st_data_sql_wrapper.cpp">
@@ -51,6 +54,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="st_data_excel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="st_data_meta_data.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

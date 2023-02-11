@@ -24,7 +24,7 @@ namespace st_data
         int iId;
         int iVerId;
         std::wstring strName;       
-        double d_defaule_off_Percent;       
+        double d_defaut_off_Percent;       
     };
     typedef std::vector<STPRODUCT> LISTPRODUCT;
 
