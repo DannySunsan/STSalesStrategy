@@ -42,8 +42,8 @@ namespace st_data
         wchar_t wSql[255];
         
         swprintf_s(wSql, L"INSERT INTO stSale.sale_strategy \
-            [(name, describe,company_id,off_type,off_percent)] \
-            VALUES(%s,%s,%d,%d,%lf)", st.strName.c_str(), st.strDescribe.c_str(),st.iCompanyId, (int)st.bTotalOff, st.dOffPercent);
+            [(name, describe,company_id,off_percent)] \
+            VALUES(%s,%s,%d,%d,%lf)", st.strName.c_str(), st.strDescribe.c_str(),st.iCompanyId, st.dOffPercent);
         char sSql[255];
         st_core::CConvert::WCharToUTF8(wSql, 255, sSql, 255);
         iRet = m_sql->Execute(sSql);

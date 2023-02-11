@@ -28,7 +28,7 @@ namespace st_data
     };
     typedef std::vector<STPRODUCT> LISTPRODUCT;
 
-    struct STSERVICE
+    struct STSERVICE//module
     {
         int iId;
         int iProductId;
@@ -49,7 +49,6 @@ namespace st_data
         int iCompanyId;
         std::wstring strCreateTime;
         LISTSERVICE lstService;
-        bool bTotalOff;
         double dOffPercent;
         double dFinalPrice;
     };

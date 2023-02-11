@@ -15,8 +15,8 @@
 #define new DEBUG_NEW
 #endif
 
-const wchar_t* PRODUCT_TABLE[] = { L"名称",L"价格" ,L"折扣" ,L"优惠价" ,L"描述" };
-const int PRODUCT_TABLE_SIZE[] = { 30,100,50,50,50,150 };
+const wchar_t* PRODUCT_TABLE[] = { L"产品",L"模块", L"价格" ,L"节点数量" ,L"折扣" ,L"其他信息" };
+const int PRODUCT_TABLE_SIZE[] = { 100,300,100,100,100,500 };
 
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
@@ -69,33 +69,19 @@ void CSTMainDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST_MAIN, m_lstMain);
-	DDX_Control(pDX, IDC_BUTTON_EXPORT, m_btnExport);
-	DDX_Control(pDX, IDC_COMBO_PRODUCT, m_cmbProduct);
-	DDX_Control(pDX, IDC_COMBO_VERSION, m_cbVersion);
-	DDX_Control(pDX, IDC_COMBO_COMPANY, m_cbCompany);
-	DDX_Control(pDX, IDC_COMBO_ST, m_cbStrategy);
-	DDX_Control(pDX, IDC_LIST_STRATAGE, m_listSt);
 }
 
 BEGIN_MESSAGE_MAP(CSTMainDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-    ON_BN_CLICKED(IDC_BUTTON_EXPORT, &CSTMainDlg::OnBnClickedButtonExport)
-    ON_CBN_SELCHANGE(IDC_COMBO_PRODUCT, &CSTMainDlg::OnCbnSelchangeComboProduct)
-	ON_BN_CLICKED(IDC_BUTTON_N_PRODUCT, &CSTMainDlg::OnBnClickedButtonNProduct)
-	ON_BN_CLICKED(IDC_BUTTON_N_STG, &CSTMainDlg::OnBnClickedButtonNStg)
-    ON_CBN_SELCHANGE(IDC_COMBO_VERSION, &CSTMainDlg::OnCbnSelchangeComboVersion)
-    ON_CBN_SELCHANGE(IDC_COMBO_COMPANY, &CSTMainDlg::OnCbnSelchangeComboCompany)
-    ON_CBN_SELCHANGE(IDC_COMBO_ST, &CSTMainDlg::OnCbnSelchangeComboSt)
-    ON_BN_CLICKED(IDC_BUTTON_RIGHT, &CSTMainDlg::OnBnClickedButtonRight)
-    ON_BN_CLICKED(IDC_BUTTON_LEFT, &CSTMainDlg::OnBnClickedButtonLeft)
-    ON_BN_CLICKED(IDC_BUTTON_TS, &CSTMainDlg::OnBnClickedButtonTs)
-    ON_BN_CLICKED(IDC_BUTTON_COMMIT, &CSTMainDlg::OnBnClickedButtonCommit)
-    ON_COMMAND(ID_MAINME_PROJECT_SAVE, &CSTMainDlg::OnMainmeProjectSave)
-    ON_COMMAND(ID_MAINME_PROJECT_EXIT, &CSTMainDlg::OnMainmeProjectExit)
     ON_WM_KEYDOWN()
     ON_WM_CLOSE()
+    ON_COMMAND(ID_PROJECT_OPEN, &CSTMainDlg::OnProjectOpen)
+    ON_COMMAND(ID_PROJECT_IMPORT, &CSTMainDlg::OnProjectImport)
+    ON_COMMAND(ID_PROJECT_NEW, &CSTMainDlg::OnProjectNew)
+    ON_COMMAND(ID_MAINME_PROJECT_SAVE, &CSTMainDlg::OnMainmeProjectSave)
+    ON_COMMAND(ID_PROJECT_NEW, &CSTMainDlg::OnMainmeProjectExit)
 END_MESSAGE_MAP()
 
 
@@ -104,18 +90,7 @@ void CSTMainDlg::InitList()
 {
     m_lstMain.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES | LVS_EX_CHECKBOXES);
 
-    for (int i = 0; i < sizeof(PRODUCT_TABLE); i++)
-    {
-        m_lstMain.InsertColumn(i, PRODUCT_TABLE[i]);
-        m_lstMain.SetColumnWidth(i, PRODUCT_TABLE_SIZE[i]);
-    }
-}
-
-void CSTMainDlg::InitListStService()
-{
-    m_lstMain.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES | LVS_EX_CHECKBOXES);
-
-    for (int i = 0; i < sizeof(PRODUCT_TABLE); i++)
+    for (int i = 0; i < 6; i++)
     {
         m_lstMain.InsertColumn(i, PRODUCT_TABLE[i]);
         m_lstMain.SetColumnWidth(i, PRODUCT_TABLE_SIZE[i]);
@@ -127,105 +102,81 @@ void CSTMainDlg::LoadMyMenu()
     m_Menu.LoadMenuW(IDR_MENU_MAIN);
     SetMenu(&m_Menu);
 }
-
-void CSTMainDlg::ChangeVersion(int iVerId)
-{
-    m_iCurVersion = iVerId;
-    RefreshProduct();
-}
-
-void CSTMainDlg::ChangeProduct(int iProductId)
-{
-    m_iCurProduct = iProductId;
-    RefreshProductList();
-}
-
-void CSTMainDlg::ChangeCompany(int iCompanyId)
-{
-    m_iCurCompany = iCompanyId;
-
-}
-
-void CSTMainDlg::ChangeStrategy(int iStrategyId)
-{
-    iStrategyId = m_iCurStrategy;
-
-}
-
-void CSTMainDlg::RefreshVersion()
-{
-    m_cbVersion.Clear();
-    if (0 == st_data::CSchemaManager::GetInstance()->GetVersion(m_lstVer))
-    {
-        for (int i = 0; i < m_lstVer.size(); ++i)
-        {
-            m_cmbProduct.InsertString(i, m_lstVer[i].strName.c_str());
-        }
-    }
-    m_cbVersion.SetCurSel(0);
-}
-
-void CSTMainDlg::RefreshProduct()
-{
-    m_cmbProduct.Clear();
-    if (0 == st_data::CSchemaManager::GetInstance()->GetProduct(m_iCurVersion, m_lstProduct))
-    {
-        for (int i = 0;i< m_lstProduct.size();++i)
-        {
-            m_cmbProduct.InsertString(i, m_lstProduct[i].strName.c_str());
-        }
-    }
-    m_cmbProduct.SetCurSel(0);
-}
-
-void CSTMainDlg::RefreshCompany()
-{
-    m_cbCompany.Clear();
-    if (0 == st_data::CSchemaManager::GetInstance()->GetCompany(m_lstCompany))
-    {
-        for (int i = 0; i < m_lstCompany.size(); ++i)
-        {
-            m_cbCompany.InsertString(i, m_lstCompany[i].strName.c_str());
-        }
-    }
-    m_cbCompany.SetCurSel(0);
-}
-
-void CSTMainDlg::RefreshStrategy()
-{
-    m_cbStrategy.Clear();
-    if (0 == st_data::CSchemaManager::GetInstance()->GetStrategy(m_iCurVersion, m_lstSt))
-    {
-        for (int i = 0; i < m_lstSt.size(); ++i)
-        {
-            m_cbStrategy.InsertString(i, m_lstSt[i].strName.c_str());
-        }
-    }
-    m_cbStrategy.SetCurSel(0);
-}
-
-void CSTMainDlg::RefreshProductList()
-{
-    m_lstMain.DeleteAllItems();
-    InitList();
-    if (0 == st_data::CSchemaManager::GetInstance()->GetService(m_iCurProduct, m_lstServ))
-    {
-        for (int i = 0; i < m_lstServ.size(); ++i)
-        {
-            int nCol = 1;
-            m_lstMain.InsertItem(i,L"");
-            m_lstMain.SetItemText(i, nCol++, m_lstServ[i].strName.c_str());
-            m_lstMain.SetItemText(i, nCol++, L"");
-            m_lstMain.SetItemText(i, nCol++, L"");
-            m_lstMain.SetItemText(i, nCol++, L"");
-        }
-    }
-    m_cbStrategy.SetCurSel(0);
-}
+//
+//void CSTMainDlg::RefreshVersion()
+//{
+//    m_cbVersion.Clear();
+//    if (0 == st_data::CSchemaManager::GetInstance()->GetVersion(m_lstVer))
+//    {
+//        for (int i = 0; i < m_lstVer.size(); ++i)
+//        {
+//            m_cmbProduct.InsertString(i, m_lstVer[i].strName.c_str());
+//        }
+//    }
+//    m_cbVersion.SetCurSel(0);
+//}
+//
+//void CSTMainDlg::RefreshProduct()
+//{
+//    m_cmbProduct.Clear();
+//    if (0 == st_data::CSchemaManager::GetInstance()->GetProduct(m_iCurVersion, m_lstProduct))
+//    {
+//        for (int i = 0;i< m_lstProduct.size();++i)
+//        {
+//            m_cmbProduct.InsertString(i, m_lstProduct[i].strName.c_str());
+//        }
+//    }
+//    m_cmbProduct.SetCurSel(0);
+//}
+//
+//void CSTMainDlg::RefreshCompany()
+//{
+//    m_cbCompany.Clear();
+//    if (0 == st_data::CSchemaManager::GetInstance()->GetCompany(m_lstCompany))
+//    {
+//        for (int i = 0; i < m_lstCompany.size(); ++i)
+//        {
+//            m_cbCompany.InsertString(i, m_lstCompany[i].strName.c_str());
+//        }
+//    }
+//    m_cbCompany.SetCurSel(0);
+//}
+//
+//void CSTMainDlg::RefreshStrategy()
+//{
+//    m_cbStrategy.Clear();
+//    if (0 == st_data::CSchemaManager::GetInstance()->GetStrategy(m_iCurVersion, m_lstSt))
+//    {
+//        for (int i = 0; i < m_lstSt.size(); ++i)
+//        {
+//            m_cbStrategy.InsertString(i, m_lstSt[i].strName.c_str());
+//        }
+//    }
+//    m_cbStrategy.SetCurSel(0);
+//}
+//
+//void CSTMainDlg::RefreshProductList()
+//{
+//    m_lstMain.DeleteAllItems();
+//    InitList();
+//    if (0 == st_data::CSchemaManager::GetInstance()->GetService(m_iCurProduct, m_lstServ))
+//    {
+//        for (int i = 0; i < m_lstServ.size(); ++i)
+//        {
+//            int nCol = 1;
+//            m_lstMain.InsertItem(i,L"");
+//            m_lstMain.SetItemText(i, nCol++, m_lstServ[i].strName.c_str());
+//            m_lstMain.SetItemText(i, nCol++, L"");
+//            m_lstMain.SetItemText(i, nCol++, L"");
+//            m_lstMain.SetItemText(i, nCol++, L"");
+//        }
+//    }
+//    m_cbStrategy.SetCurSel(0);
+//}
 
 void CSTMainDlg::RefreshStrategyServiceList()
 {
-    m_listSt.DeleteAllItems();
+   /* m_listSt.DeleteAllItems();
     InitListStService();
     if (0 == st_data::CSchemaManager::GetInstance()->GetStrategyService(m_iCurStrategy, m_lstStService))
     {
@@ -239,21 +190,21 @@ void CSTMainDlg::RefreshStrategyServiceList()
             m_listSt.SetItemText(i, nCol++, L"");
         }
     }
-    m_cbStrategy.SetCurSel(0);
+    m_cbStrategy.SetCurSel(0);*/
 
 }
 
-std::wstring CSTMainDlg::GetServiceNameById(int iId)
-{
-    for (int i = 0; i < m_lstServ.size(); ++i)
-    {
-        if (m_lstServ[i].iId == iId) 
-        {
-            return m_lstServ[i].strName;
-        }
-    }
-    return L"Null";
-}
+//std::wstring CSTMainDlg::GetServiceNameById(int iId)
+//{
+//    for (int i = 0; i < m_lstServ.size(); ++i)
+//    {
+//        if (m_lstServ[i].iId == iId) 
+//        {
+//            return m_lstServ[i].strName;
+//        }
+//    }
+//    return L"Null";
+//}
 
 // CSTMainDlg 消息处理程序
 
@@ -288,7 +239,7 @@ BOOL CSTMainDlg::OnInitDialog()
 
 	// TODO: 在此添加额外的初始化代码
     LoadMyMenu();
-    RefreshVersion();
+    InitList();
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -341,94 +292,15 @@ HCURSOR CSTMainDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CSTMainDlg::OnBnClickedButtonExport()
-{
-    // TODO: 在此添加控件通知处理程序代码
-}
-
-void CSTMainDlg::OnBnClickedButtonNProduct()
-{
-    STImportDlg dlg;
-    dlg.DoModal();
-}
-
-void CSTMainDlg::OnBnClickedButtonNStg()
-{
-    STStrategyDlg dlg;
-    dlg.DoModal();
-}
-
-void CSTMainDlg::OnCbnSelchangeComboProduct()
-{
-    if (m_lstProduct.size() == 0)
-    {
-        return;
-    }
-    ChangeProduct(m_lstProduct[m_cmbProduct.GetCurSel()].iId);
-    RefreshProductList();
-}
-
-void CSTMainDlg::OnCbnSelchangeComboVersion()
-{
-    if (m_lstVer.size() == 0)
-    {
-        return;
-    }
-    ChangeVersion(m_lstVer[m_cbVersion.GetCurSel()].iId);
-    RefreshProduct();
-}
-
-
-void CSTMainDlg::OnCbnSelchangeComboCompany()
-{
-    if (m_lstCompany.size() == 0)
-    {
-        return;
-    }
-    ChangeCompany(m_lstCompany[m_cbCompany.GetCurSel()].iId);
-    RefreshStrategy();
-}
-
-
-void CSTMainDlg::OnCbnSelchangeComboSt()
-{
-    if (m_lstSt.size() == 0)
-    {
-        return;
-    }
-    ChangeStrategy(m_lstSt[m_cbStrategy.GetCurSel()].iId);
-    RefreshStrategyServiceList();
-}
-
-
 void CSTMainDlg::OnBnClickedButtonRight()
 {
     // TODO: 在此添加控件通知处理程序代码
 }
 
-
 void CSTMainDlg::OnBnClickedButtonLeft()
 {
     // TODO: 在此添加控件通知处理程序代码
 }
-
-
-void CSTMainDlg::OnBnClickedButtonTs()
-{
-    // TODO: 在此添加控件通知处理程序代码
-}
-
-
-void CSTMainDlg::OnBnClickedButtonCommit()
-{
-    OnMainmeProjectSave();
-}
-
-void CSTMainDlg::OnMainmeProjectSave()
-{
-    // TODO: 在此添加命令处理程序代码
-}
-
 
 void CSTMainDlg::OnMainmeProjectExit()
 {
@@ -497,4 +369,30 @@ void CSTMainDlg::OnClose()
         break;
     }
     CDialogEx::OnClose();
+}
+
+
+void CSTMainDlg::OnProjectOpen()
+{
+    STImportDlg dlg;
+    dlg.DoModal();
+}
+
+
+void CSTMainDlg::OnProjectImport()
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CSTMainDlg::OnProjectNew()
+{
+    STStrategyDlg dlg;
+    dlg.DoModal();
+}
+
+
+void CSTMainDlg::OnMainmeProjectSave()
+{
+    // TODO: 在此添加命令处理程序代码
 }

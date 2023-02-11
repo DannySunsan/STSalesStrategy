@@ -50,19 +50,25 @@
 #define IDC_EDIT1                       1042
 #define IDC_EDIT2                       1043
 #define IDC_BUTTON_SELECTEXCEL          1044
+#define IDC_LIST_PRODUCT                1046
+#define IDC_LIST2                       1047
+#define IDC_LIST_SERVICE                1047
 #define ID_PROJECT_SAVE                 32771
 #define ID_PROJECT_EXIT                 32772
 #define ID_PROJECT_SAVE32773            32773
 #define ID_MAINME_PROJECT_SAVE          32774
 #define ID_MAINME_PROJECT_EXIT          32775
+#define ID_PROJECT_OPEN                 32776
+#define ID_PROJECT_IMPORT               32777
+#define ID_PROJECT_NEW                  32778
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        141
-#define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         1045
+#define _APS_NEXT_COMMAND_VALUE         32779
+#define _APS_NEXT_CONTROL_VALUE         1048
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
